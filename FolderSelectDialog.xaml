@@ -1,0 +1,81 @@
+﻿<Window x:Class="WpfApp1.FolderSelectDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+   xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Select Target Folder" Height="500" Width="650"
+  WindowStartupLocation="CenterOwner"
+        ResizeMode="CanResize"
+  Background="#FFF5F5F5">
+    <Grid Margin="20">
+  <Grid.RowDefinitions>
+       <RowDefinition Height="Auto"/>
+    <RowDefinition Height="Auto"/>
+     <RowDefinition Height="Auto"/>
+   <RowDefinition Height="*"/>
+   <RowDefinition Height="Auto"/>
+ </Grid.RowDefinitions>
+
+      <!-- Title -->
+  <TextBlock Grid.Row="0" Text="Select Target Folder" FontSize="16" FontWeight="Bold" Margin="0,0,0,15"/>
+
+        <!-- Current Path Info -->
+        <StackPanel Grid.Row="1" Margin="0,0,0,10">
+       <TextBlock Text="Current Path:" FontWeight="Bold" Margin="0,0,0,5"/>
+            <Border Background="White" Padding="8" 
+     BorderBrush="#FFCCCCCC" BorderThickness="1">
+     <TextBlock x:Name="txtCurrentPath" Text="/" TextWrapping="Wrap"/>
+      </Border>
+        </StackPanel>
+
+        <!-- File Count Info -->
+        <TextBlock Grid.Row="2" x:Name="txtFileCount" 
+       Text="Moving 0 file(s)" 
+      Foreground="#FF666666" 
+      Margin="0,0,0,15"/>
+
+ <!-- Folder List -->
+        <GroupBox Grid.Row="3" Header="Available Folders" Padding="10">
+     <ListBox x:Name="lstFolders" 
+      SelectionMode="Single"
+        ScrollViewer.VerticalScrollBarVisibility="Auto"
+    Background="White"
+  BorderBrush="#FFCCCCCC"
+    SelectionChanged="LstFolders_SelectionChanged">
+  <ListBox.ItemTemplate>
+  <DataTemplate>
+       <StackPanel Orientation="Horizontal" Margin="5">
+       <TextBlock Text="📁" FontSize="16" Margin="0,0,10,0" 
+    FontFamily="Segoe UI Emoji, Microsoft YaHei UI"/>
+    <TextBlock Text="{Binding DisplayPath}" VerticalAlignment="Center" FontSize="14"/>
+   </StackPanel>
+</DataTemplate>
+</ListBox.ItemTemplate>
+    <ListBox.ItemContainerStyle>
+    <Style TargetType="ListBoxItem">
+  <Setter Property="Padding" Value="5"/>
+   <Setter Property="Margin" Value="0,2"/>
+        <Style.Triggers>
+    <Trigger Property="IsMouseOver" Value="True">
+   <Setter Property="Background" Value="#FFE3F2FD"/>
+           </Trigger>
+      <Trigger Property="IsSelected" Value="True">
+      <Setter Property="Background" Value="#FF2196F3"/>
+   <Setter Property="Foreground" Value="White"/>
+        </Trigger>
+        </Style.Triggers>
+      </Style>
+            </ListBox.ItemContainerStyle>
+ </ListBox>
+   </GroupBox>
+
+     <!-- Buttons -->
+        <StackPanel Grid.Row="4" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,15,0,0">
+      <Button x:Name="btnOK" Content="OK" Width="100" Height="35" 
+ Click="BtnOK_Click" IsEnabled="False"
+       Background="#FF4CAF50" Foreground="White" FontWeight="Bold" 
+       Margin="0,0,10,0"/>
+    <Button x:Name="btnCancel" Content="Cancel" Width="100" Height="35" 
+  Click="BtnCancel_Click"
+     Background="#FFCCCCCC" FontWeight="Bold"/>
+  </StackPanel>
+</Grid>
+</Window>
